@@ -1,42 +1,34 @@
-import { Clock, ShieldCheck, BadgeCheck, Upload, ChevronDown, ArrowRight, Lock } from 'lucide-react';
+import { Clock, ShieldCheck, BadgeCheck, ArrowRight, Lock } from 'lucide-react';
 import { useState } from 'react';
 
-const zonas = [
-  'Montevideo', 'Canelones', 'Maldonado', 'Colonia', 'San José',
-  'Salto', 'Paysandú', 'Rivera', 'Tacuarembó', 'Otro',
-];
-
-const tiposVivienda = [
-  'Casa individual', 'Apartamento', 'Casa en condominio', 'Chacra / Campo', 'Local comercial',
-];
+const WHATSAPP_NUMBER = '59893350714';
 
 function DiagnosticForm() {
   const [form, setForm] = useState({
     nombre: '',
     whatsapp: '',
     zona: '',
-    archivo: null,
     tipoVivienda: '',
+    facturaUTE: '',
   });
-  const [fileName, setFileName] = useState('Ningún archivo seleccionado');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFile = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setForm((prev) => ({ ...prev, archivo: file }));
-      setFileName(file.name);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Visual only - no backend
-    alert('¡Solicitud recibida! Nos contactaremos en 24 horas hábiles.');
+    const mensaje =
+      `Hola, quiero solicitar un diagnóstico gratuito de energía solar.\n\n` +
+      `*Nombre:* ${form.nombre}\n` +
+      `*WhatsApp:* ${form.whatsapp}\n` +
+      `*Zona:* ${form.zona}\n` +
+      `*Tipo de vivienda:* ${form.tipoVivienda}\n` +
+      `*Monto factura UTE:* $${form.facturaUTE}`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -101,7 +93,7 @@ function DiagnosticForm() {
           <input
             type="tel"
             name="whatsapp"
-            placeholder="WhatsApp"
+            placeholder="Tu número de WhatsApp"
             value={form.whatsapp}
             onChange={handleChange}
             required
@@ -117,56 +109,49 @@ function DiagnosticForm() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </span>
-          <select
+          <input
+            type="text"
             name="zona"
+            placeholder="Zona o ciudad (ej: Montevideo)"
             value={form.zona}
             onChange={handleChange}
             required
-            className="w-full border border-gray-200 rounded-lg pl-9 pr-8 py-2.5 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy appearance-none bg-white"
-          >
-            <option value="" disabled>Zona</option>
-            {zonas.map((z) => (
-              <option key={z} value={z}>{z}</option>
-            ))}
-          </select>
-          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-        </div>
-
-        {/* Factura UTE */}
-        <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">
-            Factura de UTE (subí tu última factura)
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <span className="border border-gray-300 bg-gray-50 text-xs text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-1.5">
-              <Upload size={13} />
-              Seleccionar archivo
-            </span>
-            <span className="text-xs text-gray-400 truncate">{fileName}</span>
-            <input
-              type="file"
-              accept=".pdf,.jpg,.jpeg,.png"
-              onChange={handleFile}
-              className="hidden"
-            />
-          </label>
+            className="w-full border border-gray-200 rounded-lg pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy"
+          />
         </div>
 
         {/* Tipo de vivienda */}
         <div className="relative">
-          <select
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 21V12h6v9" />
+            </svg>
+          </span>
+          <input
+            type="text"
             name="tipoVivienda"
+            placeholder="Tipo de vivienda (ej: Casa, Apartamento)"
             value={form.tipoVivienda}
             onChange={handleChange}
             required
-            className="w-full border border-gray-200 rounded-lg pl-3 pr-8 py-2.5 text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy appearance-none bg-white"
-          >
-            <option value="" disabled>Tipo de vivienda — Seleccioná una opción</option>
-            {tiposVivienda.map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+            className="w-full border border-gray-200 rounded-lg pl-9 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy"
+          />
+        </div>
+
+        {/* Monto factura UTE */}
+        <div className="relative">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-medium text-sm">$</span>
+          <input
+            type="number"
+            name="facturaUTE"
+            placeholder="Monto aproximado de tu factura UTE"
+            value={form.facturaUTE}
+            onChange={handleChange}
+            required
+            min="0"
+            className="w-full border border-gray-200 rounded-lg pl-7 pr-3 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy"
+          />
         </div>
 
         {/* Submit */}

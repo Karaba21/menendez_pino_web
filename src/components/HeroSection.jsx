@@ -3,6 +3,7 @@ import { CheckCircle2, CalendarCheck } from 'lucide-react';
 export default function HeroSection() {
   return (
     <section
+      id="inicio"
       className="relative min-h-[600px] flex items-center"
       style={{
         background: 'linear-gradient(120deg, #0f1f45 0%, #1B2D5B 55%, #2a4a8a 100%)',

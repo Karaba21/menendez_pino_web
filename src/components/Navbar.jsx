@@ -1,7 +1,13 @@
 import { MessageCircle, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
-const navLinks = ['Inicio', 'Cómo funciona', 'Beneficios', 'Proyectos', 'Preguntas frecuentes'];
+const navLinks = [
+  { label: 'Inicio',               href: '#inicio'        },
+  { label: 'Cómo funciona',        href: '#como-funciona' },
+  { label: 'Quiénes somos',        href: '#quienes-somos' },
+  { label: 'Para empresas',        href: '#para-empresas' },
+  { label: 'Preguntas frecuentes', href: '#faq'           },
+];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,21 +30,24 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
-                key={link}
-                href="#"
+                key={link.href}
+                href={link.href}
                 className="text-sm text-gray-700 hover:text-navy font-medium transition-colors"
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>
 
           {/* CTA button */}
           <div className="hidden md:block">
-            <button className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-navy-light transition-colors">
+            <a
+              href="#diagnostico"
+              className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-navy-light transition-colors"
+            >
               <MessageCircle size={16} />
               Solicitar diagnóstico
-            </button>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -57,17 +66,22 @@ export default function Navbar() {
         <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 space-y-3">
           {navLinks.map((link) => (
             <a
-              key={link}
-              href="#"
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
               className="block text-sm text-gray-700 hover:text-navy font-medium py-2 transition-colors"
             >
-              {link}
+              {link.label}
             </a>
           ))}
-          <button className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full justify-center">
+          <a
+            href="#diagnostico"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full justify-center"
+          >
             <MessageCircle size={16} />
             Solicitar diagnóstico
-          </button>
+          </a>
         </div>
       )}
     </nav>
