@@ -1,26 +1,59 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const faqs = [
-  {
-    question: '¿Cuánto cuesta un sistema solar fotovoltaico?',
-    answer:
-      'El costo depende del tamaño del sistema, que a su vez depende de tu consumo. Un sistema típico para un hogar uruguayo puede costar entre USD X.XXX y USD XX.XXX. En el diagnóstico gratuito te damos una estimación precisa para tu caso.',
-  },
-  {
-    question: '¿En cuánto tiempo recupero la inversión?',
-    answer:
-      'El retorno promedio en Uruguay está entre 4 y 7 años, dependiendo del consumo, la tarifa y el tipo de sistema. En nuestro análisis calculamos el período de retorno específico para tu caso antes de que tomes ninguna decisión.',
-  },
+const faqsCasas = [
   {
     question: '¿Necesito un techo especial para instalar paneles?',
     answer:
-      'No necesariamente. Evaluamos la orientación, inclinación y superficie disponible de tu techo para determinar si es viable. La mayoría de los techos planos o inclinados hacia el norte son aptos.',
+      'No necesariamente. Evaluamos la orientación, inclinación, superficie disponible y posibles sombras para determinar la viabilidad de la instalación. En general, los techos planos o con buena orientación hacia el norte suelen ser los más favorables.',
+  },
+  {
+    question: '¿Los paneles funcionan en días nublados?',
+    answer:
+      'Sí, los paneles siguen generando energía en días nublados, aunque producen menos que en días soleados. El sistema se analiza considerando el comportamiento anual, no solamente un día puntual.',
+  },
+  {
+    question: '¿Vale la pena instalar paneles si no estoy todo el día en casa?',
+    answer:
+      'Sí, puede valer la pena. Justamente, si durante el día consume poca energía, su casa puede estar generando mientras no está. Luego se analiza cómo aprovechar esa producción según su consumo, tarifa y el tipo de instalación más conveniente.',
+  },
+  {
+    question: '¿Tengo que cambiar toda la instalación eléctrica de mi casa?',
+    answer:
+      'Normalmente, no. En muchos casos se puede integrar el sistema solar a la instalación existente, pero antes se revisan las condiciones eléctricas para asegurar que la solución sea segura y adecuada.',
   },
   {
     question: '¿Qué pasa con los trámites ante UTE?',
     answer:
-      'Nos encargamos de toda la gestión: solicitud de conexión, inspección y habilitación. Vos no tenés que hacer ningún trámite de forma individual.',
+      'Nos encargamos de toda la gestión ante UTE, incluyendo la solicitud de conexión, inspección y habilitación del sistema. No deberá realizar ningún trámite por su cuenta.',
+  },
+];
+
+const faqsEmpresas = [
+  {
+    question: '¿Una empresa puede ahorrar con energía solar?',
+    answer:
+      'Sí, especialmente si tiene consumo eléctrico elevado durante el día. Comercios, industrias, oficinas, estaciones de servicio, depósitos, supermercados y otros negocios pueden tener buen potencial de ahorro si el consumo y el espacio disponible acompañan.',
+  },
+  {
+    question: '¿Qué tipo de empresas son más adecuadas para instalar paneles solares?',
+    answer:
+      'Las empresas con consumo eléctrico constante, techos disponibles y facturas relevantes suelen ser buenas candidatas. También es interesante para negocios que buscan reducir costos operativos y aumentar margen.',
+  },
+  {
+    question: '¿Puedo instalar paneles en un techo industrial o comercial?',
+    answer:
+      'Sí, siempre que la estructura sea apta y tenga espacio suficiente. Se evalúan aspectos como resistencia del techo, orientación, inclinación, sombras, accesos y seguridad de instalación.',
+  },
+  {
+    question: '¿Puedo monitorear el funcionamiento del sistema?',
+    answer:
+      'Sí. Vas a poder ver la generación de tus paneles en tiempo real desde una app en tu celular. Además, nosotros también nos encargamos del seguimiento del sistema para acompañarte en la postventa y asegurar su correcto funcionamiento.',
+  },
+  {
+    question: '¿Existen beneficios fiscales o incentivos para empresas?',
+    answer:
+      'Sí. Nuestro servicio incluye el apoyo de una contadora especializada para evaluar y postular el proyecto a posibles beneficios fiscales, además de la revisión anual del cumplimiento correspondiente.',
   },
 ];
 
@@ -49,10 +82,26 @@ function FAQItem({ question, answer }) {
   );
 }
 
+function FAQColumn({ title, faqs }) {
+  return (
+    <div className="flex flex-col">
+      <div className="flex items-center gap-2 mb-5">
+        <span className="text-orange text-xs font-black tracking-widest uppercase">{title}</span>
+        <div className="flex-1 h-px bg-orange/20" />
+      </div>
+      <div className="bg-gray-50 rounded-2xl px-6 divide-y divide-gray-100 flex-1">
+        {faqs.map((faq, i) => (
+          <FAQItem key={i} question={faq.question} answer={faq.answer} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function FAQSection() {
   return (
     <section id="faq" className="bg-white py-16 px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-orange text-xs font-bold tracking-widest uppercase mb-3">
             PREGUNTAS FRECUENTES
@@ -65,10 +114,9 @@ export default function FAQSection() {
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-2xl px-6 divide-y divide-gray-100">
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} question={faq.question} answer={faq.answer} />
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FAQColumn title="Casas" faqs={faqsCasas} />
+          <FAQColumn title="Empresas" faqs={faqsEmpresas} />
         </div>
       </div>
     </section>

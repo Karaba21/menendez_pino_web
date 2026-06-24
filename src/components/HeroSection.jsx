@@ -1,4 +1,5 @@
-import { CheckCircle2, CalendarCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import DiagnosticForm from './DiagnosticForm';
 
 export default function HeroSection() {
   return (
@@ -35,7 +36,7 @@ export default function HeroSection() {
 
             {/* Heading */}
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">
-              Descubrí si tu casa<br />
+              Descubrí si tu Casa/Empresa<br />
               puede ahorrar con<br />
               <span className="text-orange">energía solar</span>
             </h1>
@@ -45,31 +46,27 @@ export default function HeroSection() {
 
             {/* Description */}
             <p className="text-blue-100 text-sm sm:text-base leading-relaxed max-w-md mb-8">
-              Analizamos tu factura de UTE, las condiciones de tu techo
-              y tu consumo para estimar tu ahorro y el retorno de inversión.
-              Diagnóstico gratuito, sin compromiso y en 24 horas hábiles.
+              Completá el formulario y recibí una evaluación personalizada para tu hogar o establecimiento.
             </p>
 
             {/* CTA Button */}
-            <button className="flex items-center gap-2 bg-orange hover:bg-orange-dark text-white font-semibold px-6 py-3.5 rounded-xl transition-colors mb-6 text-sm">
-              <CalendarCheck size={18} />
-              Solicitar diagnóstico gratuito
-            </button>
+            <a
+              href="#diagnostico"
+              className="inline-flex items-center gap-2 bg-orange hover:bg-orange-dark text-white font-semibold px-6 py-3.5 rounded-xl transition-colors mb-4 text-sm"
+            >
+              Recibí una evaluación personalizada sin compromiso
+              <ArrowRight size={18} />
+            </a>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#E87D2B" className="mr-0.5">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-white font-semibold text-sm">4,9/5</span>
-              <span className="text-blue-200 text-sm">
-                • Basado en <span className="underline cursor-pointer">opiniones</span> reales de nuestros clientes
-              </span>
-            </div>
+            {/* Support text */}
+            <p className="text-blue-200 text-sm">
+              Completá tus datos y analizamos tu caso.
+            </p>
+          </div>
+
+          {/* Right — Diagnostic Form */}
+          <div className="flex justify-center lg:justify-end">
+            <DiagnosticForm />
           </div>
         </div>
       </div>

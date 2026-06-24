@@ -1,13 +1,9 @@
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-import ValuePropositionSection from './components/ValuePropositionSection';
 import FeaturesSection from './components/FeaturesSection';
 import ClientProfilesSection from './components/ClientProfilesSection';
 import StatsSection from './components/StatsSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import TrustSignalsSection from './components/TrustSignalsSection';
 import AboutSection from './components/AboutSection';
-// import TestimonialsSection from './components/TestimonialsSection'; // Pendiente de contenido real
 import BusinessSection from './components/BusinessSection';
 import CTASection from './components/CTASection';
 import DiagnosticForm from './components/DiagnosticForm';
@@ -23,10 +19,7 @@ function App() {
       {/* 2. Hero */}
       <HeroSection />
 
-      {/* 3. Propuesta de valor */}
-      <ValuePropositionSection />
-
-      {/* FeaturesSection existente — "No todas las casas son iguales" */}
+      {/* FeaturesSection — "No todas las casas son iguales" */}
       <FeaturesSection />
 
       {/* 4. Perfiles de cliente */}
@@ -35,30 +28,11 @@ function App() {
       {/* 5. Ejemplo de ahorro orientativo */}
       <StatsSection />
 
-      {/* 6. Cómo funciona */}
-      <HowItWorksSection />
-
-      {/* 7. Señales de confianza */}
-      <TrustSignalsSection />
-
-      {/* 8. Quiénes somos */}
+      {/* 6. Quiénes somos */}
       <AboutSection />
-
-      {/* 9. Testimonios — comentado hasta tener contenido real */}
-      {/* <TestimonialsSection /> */}
 
       {/* 10. Sección para empresas */}
       <BusinessSection />
-
-      {/* 11. Formulario de evaluación gratuita */}
-      <section id="diagnostico" className="bg-gray-50 py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <CTASection />
-          <div className="flex justify-center mt-10">
-            <DiagnosticForm />
-          </div>
-        </div>
-      </section>
 
       {/* 12. Preguntas frecuentes */}
       <FAQSection />

@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:items-start leading-tight">
           <span className="text-2xl font-black text-white tracking-wider">MP</span>
           <span className="text-[8px] font-semibold text-blue-300 tracking-widest uppercase leading-none">
-            MIENDEZ PINO
+            MENÉNDEZ PINO
           </span>
         </div>
 
