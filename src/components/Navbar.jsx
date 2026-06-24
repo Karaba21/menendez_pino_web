@@ -19,13 +19,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <div className="flex flex-col items-center leading-tight">
-                <span className="text-2xl font-black text-navy tracking-wider">MP</span>
-                <span className="text-[8px] font-semibold text-navy tracking-widest uppercase leading-none">
-                  MENÉNDEZ PINO
-                </span>
-              </div>
+            <div className="flex-shrink-0">
+              <img src="/logo2.png" alt="Menéndez Pino" className="h-10 w-auto" />
             </div>
 
             {/* Desktop nav links */}
