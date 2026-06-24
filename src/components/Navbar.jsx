@@ -1,13 +1,14 @@
 import { MessageCircle, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { label: 'Inicio',               href: '#inicio'        },
-  { label: 'Cómo funciona',        href: '#como-funciona' },
-  { label: 'Casas',                href: '#casas'         },
-  { label: 'Empresas',             href: '#empresas'      },
-  { label: 'Preguntas frecuentes', href: '#faq'           },
-  { label: 'Contacto',             href: '#diagnostico'   },
+  { label: 'Inicio',               to: '/'              },
+  { label: 'Cómo funciona',        to: '/como-funciona' },
+  { label: 'Casas',                to: '/casas'         },
+  { label: 'Empresas',             to: '/empresas'      },
+  { label: 'Preguntas frecuentes', to: '/faq'           },
+  { label: 'Contacto',             to: '/contacto'      },
 ];
 
 export default function Navbar() {
@@ -19,32 +20,32 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <Link to="/" className="flex-shrink-0">
               <img src="/logo2.png" alt="Menéndez Pino" className="h-10 w-auto" />
-            </div>
+            </Link>
 
             {/* Desktop nav links */}
             <div className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
+                <Link
+                  key={link.to}
+                  to={link.to}
                   className="text-sm text-gray-700 hover:text-navy font-medium transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* CTA button */}
             <div className="hidden md:block">
-              <a
-                href="#diagnostico"
+              <Link
+                to="/contacto"
                 className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-navy-light transition-colors"
               >
                 <MessageCircle size={16} />
                 Solicitar diagnóstico
-              </a>
+              </Link>
             </div>
 
             {/* Mobile hamburger */}
@@ -68,24 +69,24 @@ export default function Navbar() {
         }`}
       >
         {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
+          <Link
+            key={link.to}
+            to={link.to}
             onClick={() => setMenuOpen(false)}
             className="block text-gray-700 hover:text-navy font-medium py-3 border-b border-gray-50 transition-colors"
           >
             {link.label}
-          </a>
+          </Link>
         ))}
         <div className="pt-3">
-          <a
-            href="#diagnostico"
+          <Link
+            to="/contacto"
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-3 rounded-lg w-full justify-center hover:bg-navy-light transition-colors"
           >
             <MessageCircle size={16} />
             Solicitar diagnóstico
-          </a>
+          </Link>
         </div>
       </div>
     </>
